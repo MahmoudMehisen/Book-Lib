@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: library_management_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      DEV_DATABASE_URL: postgres://root:root@db:5432/library_management_db
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  postgres_data:
