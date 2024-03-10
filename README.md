@@ -1,4 +1,3 @@
-
 # Library Management System
 
 This backend application manages the borrowing and returning of books in a library system.
